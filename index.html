@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Wishes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Google Sans', sans-serif;
+            background-color: #f8f8f8;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Container holding both carousel and text */
+        .container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 900px;
+            text-align: left;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+            width: 100%;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode for container */
+        .dark-mode .container {
+            background-color: #333; /* Dark background for container */
+        }
+
+        /* Dark Mode for text */
+        .dark-mode .text-container {
+            color: white; /* Change text color to white in dark mode */
+        }
+
+        /* Keep the <h1> in its original color */
+        .dark-mode .text-container h1 {
+            color: orange; /* Or your desired color */
+        }
+
+        /* Make paragraphs and credits text white */
+        .dark-mode .text-container p {
+            color: white; /* Change paragraph text to white */
+        }
+
+        .dark-mode .credits {
+            color: white; /* Change credits text color to white */
+        }
+
+        .dark-mode .credits a {
+            color: skyblue; /* Keep the artist's name link color */
+        }
+
+        .dark-mode .credits span {
+            color: red; /* Keep artist's name color unchanged */
+        }
+
+        /* Image Section */
+        .carousel {
+            flex: 1;
+            min-width: 250px;
+            margin-right: 20px;
+            overflow: hidden;
+            border-radius: 15px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+            width: 100%;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        /* Dots styled like Instagram */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s, opacity 0.3s;
+        }
+
+        .active-dot {
+            background-color: #fff;
+            opacity: 1;
+        }
+
+        /* Text Section */
+        .text-container {
+            flex: 2;
+            line-height: 1.6;
+            padding-left: 20px;
+            color: #333; /* Default text color */
+            width: 100%;
+            text-align: left;
+        }
+
+        .text-container h1 {
+            font-size: 32px;
+            color: orange;
+            margin-bottom: 10px;
+        }
+
+        .text-container p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .text-container .message {
+            font-size: 16px;
+            color: #555;
+            margin: 15px 0;
+        }
+
+        /* Credits Section */
+        .credits {
+            text-align: center;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .credits a {
+            color: skyblue;
+            text-decoration: none;
+            font-style: italic;
+            font-weight: bold; /* Make artist's name bold */
+        }
+
+        .credits span {
+            color: red;
+        }
+
+        /* Buttons Styling */
+        .footer-buttons {
+            position: fixed;
+            bottom: 18px;
+            right: 27px;
+            display: flex;
+            gap: 5.4px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .mute-button, .dark-mode-toggle {
+            background: #444;
+            color: white;
+            padding: 8px 12px;
+            font-size: 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            background-color: #2e2e2e;
+            color: white;
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                padding: 15px;
+                width: auto;
+            }
+
+            .carousel {
+                width: 100%;
+                height: 200px;
+            }
+
+            .footer-buttons {
+                bottom: 10px;
+                right: 10px;
+                flex-direction: row;
+            }
+
+            /* Adjust text padding for mobile */
+            .text-container {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+
+        /* Further responsiveness for very small screens */
+        @media screen and (max-width: 480px) {
+            .text-container h1 {
+                font-size: 28px;
+            }
+
+            .text-container p {
+                font-size: 16px;
+            }
+
+            .carousel {
+                height: 150px;
+            }
+
+            .footer-buttons button {
+                padding: 8px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Image Carousel Section -->
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="https://i.imgur.com/YHMGg3X.jpeg" alt="Birthday Image 1">
+                <img src="https://favim.com/pd/p/orig/2018/08/15/i-bp-kim-jisoo-blackpink-jisoo-Favim.com-6134790.jpg" alt="Birthday Image 2">
+                <img src="https://favim.com/pd/s11/orig/7/747/7478/74782/jisoo-scan-black-pink-scans-jisoo-Favim.com-7478293.jpg" alt="Birthday Image 3">
+                <img src="https://images6.fanpop.com/image/photos/41400000/Jisoo-jisoo-blackpink-41476977-720-703.jpg" alt="Birthday Image 4">
+                <img src="https://images6.fanpop.com/image/photos/41400000/Jisoo-jisoo-blackpink-41476974-720-710.jpg" alt="Birthday Image 5">
+            </div>
+            <!-- Dots to indicate image position -->
+            <div class="dots">
+                <span class="dot active-dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- Text Section -->
+        <div class="text-container">
+            <h1>HAPPY BIRTHDAY! 🎉</h1>
+            <p class="message">Wishing you a year of laughter, adventures, and great moments! I hope your life keeps running like the best code: no bugs, no crashes, just seamless updates to your happiness. Like the best algorithms, may your days be efficient, and like the greatest apps, may you always be evolving and improving. I hope you never run out of coffee, patience, or storage space. Here’s to another year of debugging life, enjoying the little things, and facing challenges with the resilience of an infinite loop. 🎂 May this year bring you an endless stream of good times, great memories, and the occasional reboot when needed!</p>
+        </div>
+    </div>
+
+    <!-- Credits Section -->
+    <div class="credits">
+        <p>Made with <span>&#10084;</span> by <a href="#" target="_blank">Artist</a></p>
+    </div>
+
+    <!-- Background Music -->
+    <audio id="birthday-song" loop autoplay>
+        <source src="file:///C:/Users/kay/Downloads/hbd.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Footer with buttons -->
+    <div class="footer-buttons">
+        <!-- Mute Button -->
+        <button id="mute-button" class="mute-button">🔊</button>
+        <!-- Dark Mode Toggle -->
+        <button id="dark-mode-toggle" class="dark-mode-toggle">🌙</button>
+    </div>
+
+    <script>
+        // Carousel Functionality
+        const carouselImages = document.querySelector('.carousel-images');
+        const dots = document.querySelectorAll('.dot');
+        let currentIndex = 0;
+
+        function updateCarousel() {
+            carouselImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active-dot');
+                if (index === currentIndex) {
+                    dot.classList.add('active-dot');
+                }
+            });
+        }
+
+        setInterval(() => {
+            currentIndex = (currentIndex + 1) % dots.length;
+            updateCarousel();
+        }, 1500);
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        darkModeToggle.addEventListener('click', () => {
+            const isDarkMode = document.body.classList.toggle('dark-mode');
+            darkModeToggle.textContent = isDarkMode ? '🌞' : '🌙';
+        });
+
+        // Mute Button
+        const muteButton = document.getElementById('mute-button');
+        const audioElement = document.getElementById('birthday-song');
+        muteButton.addEventListener('click', () => {
+            audioElement.muted = !audioElement.muted;
+            muteButton.textContent = audioElement.muted ? '🔇' : '🔊';
+        });
+    </script>
+</body>
+</html>
