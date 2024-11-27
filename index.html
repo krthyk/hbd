@@ -337,12 +337,34 @@ Wishing you a runtime of happiness and success in this exciting new release!</p>
         });
 
         // Mute Button
-        const muteButton = document.getElementById('mute-button');
-        const audioElement = document.getElementById('birthday-song');
-        muteButton.addEventListener('click', () => {
-            audioElement.muted = !audioElement.muted;
-            muteButton.textContent = audioElement.muted ? '🔇' : '🔊';
+const muteButton = document.getElementById('mute-button');
+const audioElement = document.getElementById('birthday-song');
+
+// Check autoplay restrictions and set the default state
+document.addEventListener('DOMContentLoaded', () => {
+    audioElement.play().catch(() => {
+        console.log("Autoplay blocked. Waiting for user interaction.");
+        audioElement.muted = true; // Start muted if autoplay is blocked
+        muteButton.textContent = '🔇'; // Update button to show muted state
+    });
+});
+
+muteButton.addEventListener('click', () => {
+    // If audio is not playing, start playback
+    if (audioElement.paused) {
+        audioElement.play().then(() => {
+            audioElement.muted = false;
+            muteButton.textContent = '🔊';
+        }).catch((error) => {
+            console.error("Error playing audio:", error);
         });
+    } else {
+        // Toggle mute/unmute
+        audioElement.muted = !audioElement.muted;
+        muteButton.textContent = audioElement.muted ? '🔇' : '🔊';
+    }
+});
+
     </script>
 </body>
 </html>
